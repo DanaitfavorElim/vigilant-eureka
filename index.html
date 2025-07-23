@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="form-header">
+            <h1><i class="fas fa-chart-line"></i> Deal Management System</h1>
+            <p>Investment Deal Submission Form</p>
+        </header>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <form id="dealForm" class="deal-form">
+            <!-- Section 1: Deal Overview -->
+            <section class="form-section active" data-section="1">
+                <h2><i class="fas fa-info-circle"></i> Deal Overview</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="dealName">Deal Name <span class="required">*</span></label>
+                        <input type="text" id="dealName" name="dealName" required>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="dealSummary">Deal Summary <span class="required">*</span></label>
+                        <textarea id="dealSummary" name="dealSummary" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="submitterName">Submitter Name <span class="required">*</span></label>
+                        <input type="text" id="submitterName" name="submitterName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="submitterEmail">Submitter Email <span class="required">*</span></label>
+                        <input type="email" id="submitterEmail" name="submitterEmail" required>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="submitterOrganization">Submitter Organization <span class="required">*</span></label>
+                        <input type="text" id="submitterOrganization" name="submitterOrganization" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="submissionDate">Submission Date</label>
+                        <input type="date" id="submissionDate" name="submissionDate" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dealId">Deal ID</label>
+                        <input type="text" id="dealId" name="dealId" readonly>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Investment Classification -->
+            <section class="form-section" data-section="2">
+                <h2><i class="fas fa-tags"></i> Investment Classification</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="investmentStructure">Investment Structure <span class="required">*</span></label>
+                        <select id="investmentStructure" name="investmentStructure" required>
+                            <option value="">Select Structure</option>
+                            <option value="direct">Direct Investment</option>
+                            <option value="fund">Fund Investment</option>
+                            <option value="co-investment">Co-Investment</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="assetClass">Asset Class <span class="required">*</span></label>
+                        <select id="assetClass" name="assetClass" required>
+                            <option value="">Select Asset Class</option>
+                            <option value="private-equity">Private Equity</option>
+                            <option value="venture-capital">Venture Capital</option>
+                            <option value="growth-equity">Growth Equity</option>
+                            <option value="real-estate">Real Estate</option>
+                            <option value="private-credit">Private Credit</option>
+                            <option value="infrastructure">Infrastructure</option>
+                            <option value="natural-resources">Natural Resources</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="isSecondary" name="isSecondary">
+                            <label for="isSecondary">Is Secondary Investment?</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Asset-Class-Specific Classifications -->
+                    <div class="form-group conditional-field" id="industrySector" style="display: none;">
+                        <label for="industrySectorSelect">Industry Sector <span class="required">*</span></label>
+                        <select id="industrySectorSelect" name="industrySector">
+                            <option value="">Select Industry</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare & Life Sciences</option>
+                            <option value="financial-services">Financial Services</option>
+                            <option value="consumer-retail">Consumer & Retail</option>
+                            <option value="industrial">Industrial & Manufacturing</option>
+                            <option value="energy-utilities">Energy & Utilities</option>
+                            <option value="business-services">Business Services</option>
+                            <option value="media-telecom">Media & Telecommunications</option>
+                            <option value="education">Education</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group conditional-field" id="propertyType" style="display: none;">
+                        <label for="propertyTypeSelect">Property Type <span class="required">*</span></label>
+                        <select id="propertyTypeSelect" name="propertyType">
+                            <option value="">Select Property Type</option>
+                            <option value="office">Office</option>
+                            <option value="retail">Retail</option>
+                            <option value="industrial">Industrial/Warehouse</option>
+                            <option value="multifamily">Multifamily Residential</option>
+                            <option value="single-family">Single Family Residential</option>
+                            <option value="hospitality">Hospitality/Hotels</option>
+                            <option value="healthcare-senior">Healthcare/Senior Living</option>
+                            <option value="self-storage">Self Storage</option>
+                            <option value="data-centers">Data Centers</option>
+                            <option value="mixed-use">Mixed Use</option>
+                            <option value="land-development">Land/Development</option>
+                            <option value="student-housing">Student Housing</option>
+                            <option value="cold-storage">Cold Storage/Logistics</option>
+                            <option value="other">Other Property Type</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group conditional-field" id="creditType" style="display: none;">
+                        <label for="creditTypeSelect">Credit Type <span class="required">*</span></label>
+                        <select id="creditTypeSelect" name="creditType">
+                            <option value="">Select Credit Type</option>
+                            <option value="direct-lending">Direct Lending</option>
+                            <option value="mezzanine">Mezzanine Financing</option>
+                            <option value="distressed-debt">Distressed Debt</option>
+                            <option value="asset-based">Asset-Based Lending</option>
+                            <option value="bridge">Bridge Financing</option>
+                            <option value="revenue-based">Revenue-Based Financing</option>
+                            <option value="equipment">Equipment Financing</option>
+                            <option value="real-estate-debt">Real Estate Debt</option>
+                            <option value="specialty">Specialty Finance</option>
+                            <option value="other">Other Credit Type</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group conditional-field" id="infrastructureType" style="display: none;">
+                        <label for="infrastructureTypeSelect">Infrastructure Type <span class="required">*</span></label>
+                        <select id="infrastructureTypeSelect" name="infrastructureType">
+                            <option value="">Select Infrastructure Type</option>
+                            <option value="transportation">Transportation (Roads, Airports, Ports)</option>
+                            <option value="energy">Energy (Power Generation, Transmission)</option>
+                            <option value="utilities">Utilities (Water, Gas, Electric)</option>
+                            <option value="water-wastewater">Water/Wastewater</option>
+                            <option value="social">Social Infrastructure (Schools, Hospitals)</option>
+                            <option value="digital">Digital Infrastructure (Telecom, Data Centers)</option>
+                            <option value="renewable">Renewable Energy</option>
+                            <option value="environmental">Environmental Services</option>
+                            <option value="other">Other Infrastructure</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group conditional-field" id="resourceType" style="display: none;">
+                        <label for="resourceTypeSelect">Resource Type <span class="required">*</span></label>
+                        <select id="resourceTypeSelect" name="resourceType">
+                            <option value="">Select Resource Type</option>
+                            <option value="oil-gas">Oil & Gas</option>
+                            <option value="mining-metals">Mining & Metals</option>
+                            <option value="timber">Timber & Forestry</option>
+                            <option value="agriculture">Agriculture & Farmland</option>
+                            <option value="water-rights">Water Rights</option>
+                            <option value="renewable-resources">Renewable Energy Resources</option>
+                            <option value="other">Other Natural Resources</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Investment Details -->
+            <section class="form-section" data-section="3">
+                <h2><i class="fas fa-dollar-sign"></i> Investment Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="dealSizeRange">Deal Size Range <span class="required">*</span></label>
+                        <select id="dealSizeRange" name="dealSizeRange" required>
+                            <option value="">Select Size Range</option>
+                            <option value="under-1m">&lt;$1M</option>
+                            <option value="1m-5m">$1M-$5M</option>
+                            <option value="5m-15m">$5M-$15M</option>
+                            <option value="15m-50m">$15M-$50M</option>
+                            <option value="50m-150m">$50M-$150M</option>
+                            <option value="150m-500m">$150M-$500M</option>
+                            <option value="over-500m">&gt;$500M</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="geographicFocus">Geographic Focus <span class="required">*</span></label>
+                        <select id="geographicFocus" name="geographicFocus" required>
+                            <option value="">Select Geographic Focus</option>
+                            <option value="united-states">United States</option>
+                            <option value="canada">Canada</option>
+                            <option value="united-kingdom">United Kingdom</option>
+                            <option value="germany">Germany</option>
+                            <option value="france">France</option>
+                            <option value="other-western-europe">Other Western Europe</option>
+                            <option value="eastern-europe">Eastern Europe</option>
+                            <option value="china">China</option>
+                            <option value="japan">Japan</option>
+                            <option value="india">India</option>
+                            <option value="other-asia-pacific">Other Asia Pacific</option>
+                            <option value="latin-america">Latin America</option>
+                            <option value="middle-east-africa">Middle East & Africa</option>
+                            <option value="global">Global</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timelineUrgency">Timeline Urgency <span class="required">*</span></label>
+                        <select id="timelineUrgency" name="timelineUrgency" required>
+                            <option value="">Select Timeline</option>
+                            <option value="immediate">Immediate (1-2 weeks)</option>
+                            <option value="urgent">Urgent (3-4 weeks)</option>
+                            <option value="standard">Standard (1-2 months)</option>
+                            <option value="flexible">Flexible (3+ months)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="priorityLevel">Priority Level</label>
+                        <select id="priorityLevel" name="priorityLevel">
+                            <option value="">Select Priority</option>
+                            <option value="high">High - Strategic/Large</option>
+                            <option value="medium">Medium - Standard Process</option>
+                            <option value="low">Low - Opportunistic</option>
+                            <option value="watch">Watch - Monitor Only</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Structure-Specific Information -->
+            <section class="form-section conditional-section" id="directInvestmentSection" data-section="4" style="display: none;">
+                <h2><i class="fas fa-building"></i> Direct Investment Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="companyName">Company Name <span class="required">*</span></label>
+                        <input type="text" id="companyName" name="companyName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="companyStage">Company Stage <span class="required">*</span></label>
+                        <select id="companyStage" name="companyStage">
+                            <option value="">Select Stage</option>
+                            <option value="pre-revenue">Pre-Revenue/Concept</option>
+                            <option value="early-revenue">Early Revenue (&lt;$1M ARR)</option>
+                            <option value="growth-stage">Growth Stage ($1M-$10M ARR)</option>
+                            <option value="scale-stage">Scale Stage ($10M-$100M ARR)</option>
+                            <option value="mature">Mature (&gt;$100M ARR)</option>
+                            <option value="profitable">Profitable & Stable</option>
+                            <option value="turnaround">Turnaround/Distressed</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessModel">Business Model</label>
+                        <select id="businessModel" name="businessModel">
+                            <option value="">Select Business Model</option>
+                            <option value="b2b-saas">B2B SaaS</option>
+                            <option value="b2c-subscription">B2C Subscription</option>
+                            <option value="marketplace">Marketplace</option>
+                            <option value="e-commerce">E-commerce</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="service-provider">Service Provider</option>
+                            <option value="transaction-based">Transaction-Based</option>
+                            <option value="advertising-based">Advertising-Based</option>
+                            <option value="freemium">Freemium</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group conditional-field" id="instrumentType" style="display: none;">
+                        <label for="instrumentTypeSelect">Instrument Type <span class="required">*</span></label>
+                        <select id="instrumentTypeSelect" name="instrumentType">
+                            <option value="">Select Instrument</option>
+                            <option value="common-equity">Common Equity</option>
+                            <option value="preferred-equity">Preferred Equity</option>
+                            <option value="convertible-preferred">Convertible Preferred</option>
+                            <option value="senior-debt">Senior Debt</option>
+                            <option value="subordinated-debt">Subordinated Debt</option>
+                            <option value="mezzanine-debt">Mezzanine Debt</option>
+                            <option value="convertible-debt">Convertible Debt</option>
+                            <option value="safe">SAFE (Simple Agreement for Future Equity)</option>
+                            <option value="revenue-based">Revenue-Based Financing</option>
+                            <option value="warrants">Warrants/Options</option>
+                            <option value="other">Other Instrument</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group conditional-field" id="investmentStrategy" style="display: none;">
+                        <label for="investmentStrategySelect">Investment Strategy <span class="required">*</span></label>
+                        <select id="investmentStrategySelect" name="investmentStrategy">
+                            <option value="">Select Strategy</option>
+                            <option value="core">Core (Stabilized, Low Risk)</option>
+                            <option value="core-plus">Core Plus (Moderate Value-Add)</option>
+                            <option value="value-add">Value-Add (Significant Improvements)</option>
+                            <option value="opportunistic">Opportunistic (High Risk/Return)</option>
+                            <option value="development">Development (Ground-Up)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="annualRevenue">Annual Revenue</label>
+                        <input type="number" id="annualRevenue" name="annualRevenue" step="0.01" placeholder="USD">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="revenueGrowthRate">Revenue Growth Rate (%)</label>
+                        <input type="number" id="revenueGrowthRate" name="revenueGrowthRate" step="0.1" placeholder="Percentage">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="employeeCount">Employee Count</label>
+                        <input type="number" id="employeeCount" name="employeeCount">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="proposedInvestmentAmount">Proposed Investment Amount <span class="required">*</span></label>
+                        <input type="number" id="proposedInvestmentAmount" name="proposedInvestmentAmount" step="0.01" placeholder="USD">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="proposedValuation">Proposed Valuation</label>
+                        <input type="number" id="proposedValuation" name="proposedValuation" step="0.01" placeholder="USD">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ownershipPercentage">Ownership Percentage (%)</label>
+                        <input type="number" id="ownershipPercentage" name="ownershipPercentage" step="0.1" max="100" placeholder="Percentage">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fund Investment Section -->
+            <section class="form-section conditional-section" id="fundInvestmentSection" data-section="4" style="display: none;">
+                <h2><i class="fas fa-chart-pie"></i> Fund Investment Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fundName">Fund Name <span class="required">*</span></label>
+                        <input type="text" id="fundName" name="fundName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gpFirmName">GP Firm Name <span class="required">*</span></label>
+                        <input type="text" id="gpFirmName" name="gpFirmName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fundVintage">Fund Number/Vintage <span class="required">*</span></label>
+                        <input type="text" id="fundVintage" name="fundVintage">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="targetFundSize">Target Fund Size <span class="required">*</span></label>
+                        <input type="number" id="targetFundSize" name="targetFundSize" step="0.01" placeholder="USD">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fundStrategy">Fund Strategy <span class="required">*</span></label>
+                        <select id="fundStrategy" name="fundStrategy">
+                            <option value="">Select Strategy</option>
+                            <option value="buyout">Buyout</option>
+                            <option value="growth-equity">Growth Equity</option>
+                            <option value="venture-capital">Venture Capital</option>
+                            <option value="distressed">Distressed</option>
+                            <option value="sector-focused">Sector-Focused</option>
+                            <option value="geographic-focused">Geographic-Focused</option>
+                            <option value="multi-strategy">Multi-Strategy</option>
+                            <option value="real-estate">Real Estate</option>
+                            <option value="infrastructure">Infrastructure</option>
+                            <option value="private-credit">Private Credit</option>
+                            <option value="secondaries">Secondaries</option>
+                            <option value="other">Other Strategy</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gpExperience">GP Experience Level <span class="required">*</span></label>
+                        <select id="gpExperience" name="gpExperience">
+                            <option value="">Select Experience</option>
+                            <option value="first-time">First-Time Fund</option>
+                            <option value="emerging">Emerging Manager (Fund 2-3)</option>
+                            <option value="established">Established Manager (Fund 4-6)</option>
+                            <option value="seasoned">Seasoned Manager (Fund 7+)</option>
+                            <option value="spin-out">Spin-Out Team</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="managementFee">Management Fee (%)</label>
+                        <input type="number" id="managementFee" name="managementFee" step="0.1" placeholder="Percentage">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="carriedInterest">Carried Interest (%)</label>
+                        <input type="number" id="carriedInterest" name="carriedInterest" step="0.1" placeholder="Percentage">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="minimumCommitment">Minimum Commitment <span class="required">*</span></label>
+                        <input type="number" id="minimumCommitment" name="minimumCommitment" step="0.01" placeholder="USD">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="proposedCommitment">Proposed Commitment <span class="required">*</span></label>
+                        <input type="number" id="proposedCommitment" name="proposedCommitment" step="0.01" placeholder="USD">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Co-Investment Section -->
+            <section class="form-section conditional-section" id="coInvestmentSection" data-section="4" style="display: none;">
+                <h2><i class="fas fa-handshake"></i> Co-Investment Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="leadInvestor">Lead Investor/Fund <span class="required">*</span></label>
+                        <input type="text" id="leadInvestor" name="leadInvestor">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="relationshipWithLead">Relationship with Lead <span class="required">*</span></label>
+                        <select id="relationshipWithLead" name="relationshipWithLead">
+                            <option value="">Select Relationship</option>
+                            <option value="existing-lp">Existing LP</option>
+                            <option value="prospective-lp">Prospective LP</option>
+                            <option value="strategic-partner">Strategic Partner</option>
+                            <option value="no-prior">No Prior Relationship</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="coInvestmentCompanyName">Company Name <span class="required">*</span></label>
+                        <input type="text" id="coInvestmentCompanyName" name="coInvestmentCompanyName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="totalRoundSize">Total Round Size <span class="required">*</span></label>
+                        <input type="number" id="totalRoundSize" name="totalRoundSize" step="0.01" placeholder="USD">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="coInvestmentAvailable">Co-Investment Available <span class="required">*</span></label>
+                        <input type="number" id="coInvestmentAvailable" name="coInvestmentAvailable" step="0.01" placeholder="USD">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="investmentStage">Investment Stage <span class="required">*</span></label>
+                        <select id="investmentStage" name="investmentStage">
+                            <option value="">Select Stage</option>
+                            <option value="seed">Seed</option>
+                            <option value="series-a">Series A</option>
+                            <option value="series-b">Series B</option>
+                            <option value="series-c">Series C</option>
+                            <option value="series-d-plus">Series D+</option>
+                            <option value="growth">Growth</option>
+                            <option value="buyout">Buyout</option>
+                            <option value="recapitalization">Recapitalization</option>
+                            <option value="special-situation">Special Situation</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="proposedCoInvestmentAmount">Proposed Co-Investment Amount <span class="required">*</span></label>
+                        <input type="number" id="proposedCoInvestmentAmount" name="proposedCoInvestmentAmount" step="0.01" placeholder="USD">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Secondary Transaction Details -->
+            <section class="form-section conditional-section" id="secondarySection" data-section="5" style="display: none;">
+                <h2><i class="fas fa-exchange-alt"></i> Secondary Transaction Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="sellerType">Seller Type <span class="required">*</span></label>
+                        <select id="sellerType" name="sellerType">
+                            <option value="">Select Seller Type</option>
+                            <option value="gp">GP (General Partner)</option>
+                            <option value="lp">LP (Limited Partner)</option>
+                            <option value="fund-institution">Fund/Institution</option>
+                            <option value="individual">Individual Investor</option>
+                            <option value="distressed">Distressed Seller</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="discountPremiumNAV">Discount/Premium to NAV (%)</label>
+                        <input type="number" id="discountPremiumNAV" name="discountPremiumNAV" step="0.1" placeholder="Negative = discount, Positive = premium">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="remainingFundLife">Remaining Fund Life (Years)</label>
+                        <input type="number" id="remainingFundLife" name="remainingFundLife" step="0.1" placeholder="Years">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reasonForSale">Reason for Sale</label>
+                        <select id="reasonForSale" name="reasonForSale">
+                            <option value="">Select Reason</option>
+                            <option value="liquidity-need">Liquidity Need</option>
+                            <option value="portfolio-rebalancing">Portfolio Rebalancing</option>
+                            <option value="distressed-situation">Distressed Situation</option>
+                            <option value="strategic-exit">Strategic Exit</option>
+                            <option value="regulatory-requirement">Regulatory Requirement</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Pipeline Management -->
+            <section class="form-section" data-section="6">
+                <h2><i class="fas fa-tasks"></i> Pipeline Management</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="pipelineStatus">Pipeline Status <span class="required">*</span></label>
+                        <select id="pipelineStatus" name="pipelineStatus" required>
+                            <option value="">Select Status</option>
+                            <option value="new-submission">New Submission</option>
+                            <option value="initial-screening">Initial Screening</option>
+                            <option value="under-review">Under Review</option>
+                            <option value="due-diligence">Due Diligence</option>
+                            <option value="investment-committee">Investment Committee</option>
+                            <option value="decision-made">Decision Made</option>
+                            <option value="closed-completed">Closed/Completed</option>
+                            <option value="declined">Declined</option>
+                            <option value="on-hold">On Hold</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dealSource">Deal Source <span class="required">*</span></label>
+                        <select id="dealSource" name="dealSource" required>
+                            <option value="">Select Source</option>
+                            <option value="direct-outreach">Direct Outreach</option>
+                            <option value="referral-investment-bank">Referral - Investment Bank</option>
+                            <option value="referral-broker">Referral - Broker</option>
+                            <option value="referral-portfolio">Referral - Existing Portfolio</option>
+                            <option value="referral-investor">Referral - Other Investor</option>
+                            <option value="referral-network">Referral - Professional Network</option>
+                            <option value="conference-event">Conference/Event</option>
+                            <option value="website-submission">Website Submission</option>
+                            <option value="cold-inbound">Cold Inbound</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dealTemperature">Deal Temperature</label>
+                        <select id="dealTemperature" name="dealTemperature">
+                            <option value="">Select Temperature</option>
+                            <option value="hot">Hot - High Interest</option>
+                            <option value="warm">Warm - Moderate Interest</option>
+                            <option value="cool">Cool - Low Interest</option>
+                            <option value="cold">Cold - No Interest</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="probabilityOfInvestment">Probability of Investment (%)</label>
+                        <input type="number" id="probabilityOfInvestment" name="probabilityOfInvestment" min="0" max="100" step="1" placeholder="0-100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="targetDecisionDate">Target Decision Date</label>
+                        <input type="date" id="targetDecisionDate" name="targetDecisionDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="followUpDate">Follow-up Date</label>
+                        <input type="date" id="followUpDate" name="followUpDate">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="nextAction">Next Action</label>
+                        <textarea id="nextAction" name="nextAction" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="internalNotes">Internal Notes</label>
+                        <textarea id="internalNotes" name="internalNotes" rows="4"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Documents & Files -->
+            <section class="form-section" data-section="7">
+                <h2><i class="fas fa-file-upload"></i> Documents & Files</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="pitchDeck">Pitch Deck</label>
+                        <input type="file" id="pitchDeck" name="pitchDeck" accept=".pdf,.ppt,.pptx">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="financialStatements">Financial Statements</label>
+                        <input type="file" id="financialStatements" name="financialStatements" accept=".pdf,.xls,.xlsx">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="businessPlan">Business Plan</label>
+                        <input type="file" id="businessPlan" name="businessPlan" accept=".pdf,.doc,.docx">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="otherDocuments">Other Documents</label>
+                        <input type="file" id="otherDocuments" name="otherDocuments" multiple>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Custom Information -->
+            <section class="form-section" data-section="8">
+                <h2><i class="fas fa-cog"></i> Additional Information</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="customField1Label">Custom Field 1 Label</label>
+                        <input type="text" id="customField1Label" name="customField1Label" placeholder="Enter field name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customField1Value">Custom Field 1 Value</label>
+                        <input type="text" id="customField1Value" name="customField1Value" placeholder="Enter value">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customField2Label">Custom Field 2 Label</label>
+                        <input type="text" id="customField2Label" name="customField2Label" placeholder="Enter field name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customField2Value">Custom Field 2 Value</label>
+                        <input type="text" id="customField2Value" name="customField2Value" placeholder="Enter value">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="additionalNotes">Additional Notes</label>
+                        <textarea id="additionalNotes" name="additionalNotes" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="specialConsiderations">Special Considerations</label>
+                        <textarea id="specialConsiderations" name="specialConsiderations" rows="4"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Buttons -->
+            <div class="form-navigation">
+                <button type="button" id="prevBtn" onclick="changeSection(-1)">
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                
+                <div class="section-indicators">
+                    <span class="indicator active" data-section="1">1</span>
+                    <span class="indicator" data-section="2">2</span>
+                    <span class="indicator" data-section="3">3</span>
+                    <span class="indicator" data-section="4">4</span>
+                    <span class="indicator" data-section="5">5</span>
+                    <span class="indicator" data-section="6">6</span>
+                    <span class="indicator" data-section="7">7</span>
+                    <span class="indicator" data-section="8">8</span>
+                </div>
+                
+                <button type="button" id="nextBtn" onclick="changeSection(1)">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <button type="submit" id="submitBtn" style="display: none;">
+                    <i class="fas fa-check"></i> Submit Deal
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,51 +1,215 @@
-# Introduction to GitHub
+# Deal Management System - Interactive Form
 
-_Get started using GitHub in less than an hour._
+A comprehensive, single-page form for investment deal management designed for small to mid-size investment institutions. This form implements the complete validated specification with modern UI/UX and intelligent conditional logic.
 
-## Welcome
+## Features
 
-People use GitHub to build some of the most advanced technologies in the world. Whether you’re visualizing data or building a new game, there’s a whole community and set of tools on GitHub that can help you do it even better. GitHub Skills’ “Introduction to GitHub” exercise guides you through everything you need to start contributing in less than an hour.
+### ✨ Core Features
+- **Single-Page Design**: All form sections on one page with smooth navigation
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- **Modern UI**: Professional appearance with smooth animations and transitions
+- **Auto-Save**: Automatically saves form progress to prevent data loss
+- **Smart Validation**: Real-time validation with helpful error messages
+- **Progress Tracking**: Visual progress bar and section indicators
 
-- **Who is this for**: New developers, new GitHub users, and students.
-- **What you'll learn**: We'll introduce repositories, branches, commits, and pull requests.
-- **What you'll build**: We'll make a short Markdown file you can use as your [profile README](https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).
-- **Prerequisites**: None. This exercise is a great introduction for your first day on GitHub.
-- **How long**: This exercise takes less than one hour to complete.
+### 🔄 Conditional Logic
+- **Investment Structure Based**: Form adapts based on Direct/Fund/Co-Investment selection
+- **Asset Class Specific**: Shows relevant fields for PE/VC/Growth, Real Estate, Private Credit, Infrastructure, Natural Resources
+- **Secondary Investment Support**: Special handling for secondary market transactions
+- **Dynamic Field Requirements**: Required fields change based on selections
+- **Label Updates**: Field labels automatically update for secondary transactions
 
-In this exercise, you will:
+### 📊 Investment Structures Supported
+1. **Direct Investment**: Company details, financial metrics, instrument types
+2. **Fund Investment**: GP information, fund terms, commitment details  
+3. **Co-Investment**: Lead investor details, deal information, access rights
 
-1. Create a branch
-2. Commit a file
-3. Open a pull request
-4. Merge your pull request
+### 🏢 Asset Classes Covered
+- Private Equity with industry sector classification
+- Venture Capital with technology/healthcare sub-sectors
+- Growth Equity with business model options
+- Real Estate with property types and investment strategies
+- Private Credit with credit type classifications
+- Infrastructure with infrastructure types and risk profiles
+- Natural Resources with resource type classifications
 
-### How to start this exercise
+### 💼 Secondary Investment Features
+- Automatic label updates for secondary transactions
+- Seller type classification
+- Discount/premium to NAV pricing
+- Remaining fund life tracking
+- Reason for sale documentation
 
-1. Right-click **Copy Exercise** and open the link in a new tab.
+## Form Sections
 
-   <a id="copy-exercise">
-      <img src="https://img.shields.io/badge/📠_Copy_Exercise-AAA" height="25pt"/>
-   </a>
+### Section 1: Deal Overview
+- Deal name and summary
+- Submitter information
+- Auto-generated submission date and deal ID
 
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.chttps://github.com/DanaitfavorElim/vigilant-eureka/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
+### Section 2: Investment Classification  
+- Investment structure selection
+- Asset class selection
+- Secondary investment flag
+- Asset-class-specific classifications
 
-3. After your new repository is created, wait about 20 seconds for the exercise to be prepared and buttons updated. You will continue working from your copy of the exercise.
-   - The **Copy Exercise** button will deactivate, changing to gray.
-   - The **Start Exercise** button will activate, changing to green.
-   - You will likely need to refresh the page.
+### Section 3: Investment Details
+- Deal size range
+- Geographic focus
+- Timeline urgency
+- Priority level
 
-4. Click **Start Exercise**. Follow the step-by-step instructions and feedback will be provided as you progress.
+### Section 4: Structure-Specific Information
+**Conditional sections based on investment structure:**
+- Direct Investment Details
+- Fund Investment Details  
+- Co-Investment Details
 
-   <a id="start-exercise" href="https://github.com/DanaitfavorElim/vigilant-eureka/issues/1">
-      <img src="https://img.shields.io/badge/🚀_Start_Exercise-008000" height="25pt"/>
-   </a>
+### Section 5: Secondary Transaction Details
+**Appears only for secondary investments:**
+- Seller information
+- Pricing details
+- Transaction specifics
 
-> [!IMPORTANT]
-> The **Start Exercise** button will activate after copying the repository. You will probably need to refresh the page.
+### Section 6: Pipeline Management
+- Pipeline status
+- Deal source tracking
+- Assessment metrics
+- Internal notes
+
+### Section 7: Documents & Files
+- File upload capabilities
+- Document categorization
+- Multi-file support
+
+### Section 8: Additional Information
+- Custom fields
+- Additional notes
+- Special considerations
+
+## Technical Features
+
+### 🎨 Modern Design
+- CSS Grid and Flexbox layouts
+- CSS Custom Properties for theming
+- Smooth animations and transitions
+- Professional color scheme
+- Custom form controls
+
+### 📱 Responsive Design
+- Mobile-first approach
+- Adaptive layouts for all screen sizes
+- Touch-friendly interface
+- Optimized navigation for mobile
+
+### ⚡ Performance
+- Efficient DOM manipulation
+- Minimal external dependencies
+- Fast loading and rendering
+- Smooth animations
+
+### 💾 Data Management
+- LocalStorage for auto-save
+- Form state persistence
+- Progress restoration
+- Data validation
+
+## Usage
+
+1. **Open the Form**: Open `index.html` in a web browser
+2. **Fill Information**: Complete each section as needed
+3. **Navigate**: Use Next/Previous buttons or click section indicators
+4. **Auto-Save**: Form automatically saves progress
+5. **Submit**: Complete form and submit when ready
+
+## Validation Rules
+
+### Required Fields
+- All fields marked with red asterisk (*) are required
+- Validation occurs when moving between sections
+- Email format validation
+- Percentage range validation (0-100%)
+- Currency format validation
+
+### Conditional Requirements
+- Secondary investment fields become required when secondary flag is checked
+- Asset-class-specific fields are required based on selections
+- Investment structure determines which sections are required
+
+## Browser Support
+
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+- Responsive design for all screen sizes
+- Progressive enhancement approach
+
+## Customization
+
+### Styling
+- Modify CSS custom properties in `:root` for color scheme changes
+- Responsive breakpoints can be adjusted in media queries
+- Animation speeds and effects can be customized
+
+### Fields
+- Add new fields by following existing HTML structure
+- Update JavaScript conditional logic for new field dependencies
+- Extend validation rules as needed
+
+### Sections
+- Additional sections can be added by following the existing pattern
+- Update navigation logic for new sections
+- Extend conditional visibility logic
+
+## File Structure
+
+```
+├── index.html          # Main HTML structure
+├── styles.css          # CSS styling and responsive design
+├── script.js           # JavaScript functionality and logic
+└── README.md          # Documentation
+```
+
+## Key JavaScript Classes and Functions
+
+### DealManagementForm Class
+- `init()`: Initialize form and event listeners
+- `changeSection()`: Navigate between sections
+- `handleInvestmentStructureChange()`: Manage conditional sections
+- `handleAssetClassChange()`: Show/hide asset-specific fields
+- `handleSecondaryChange()`: Secondary investment logic
+- `validateCurrentSection()`: Section-level validation
+- `autoSave()`: Automatic form data saving
+- `submitForm()`: Form submission handling
+
+### Utility Functions
+- `formatCurrency()`: Currency input formatting
+- `formatPercentage()`: Percentage input validation
+- `updateLabel()`: Dynamic label updates
+- `showFieldError()`: Validation error display
+
+## Implementation Notes
+
+This form implements the complete validated specification from the Deal Management System document, including:
+
+- ✅ All universal fields
+- ✅ Conditional fields by asset class
+- ✅ Investment structure specific fields
+- ✅ Secondary investment enhancements
+- ✅ Pipeline management fields
+- ✅ Document upload capabilities
+- ✅ Custom field support
+
+The form treats all fields as optional from a user interaction perspective while maintaining the logical structure and validation rules from the specification.
+
+## Future Enhancements
+
+- Backend integration for form submission
+- Advanced file upload with progress indicators
+- Multi-language support
+- Advanced analytics and reporting
+- Integration with CRM systems
+- Bulk import/export capabilities
 
 ---
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+Built with modern web technologies for optimal user experience and maintainability.
